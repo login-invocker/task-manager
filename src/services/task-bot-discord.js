@@ -21,15 +21,29 @@ const getTasks = async() => {
     }
 }
 
-const updatTask = async () => {
-
+const removeTask = async(task) => {
+    console.log(task)
+    try{
+        const response = await axios.delete(`${config.API_URL}/api/task/${task.id}`)
+        return response.status === 200 ? true : false
+    }catch{
+        return false
+    }
 }
-const removeTask = async() => {
-    
+
+const updateTask = async (task) => {
+    try{
+        const response = await axios.put(`${config.API_URL}/api/task/`,{
+            task
+        })
+        return response.data.code === 200 ? true : false
+    }catch{
+        return false
+    }
 }
 export{
     createtask,
     getTasks,
-    updatTask,
-    removeTask
+    updateTask,
+    removeTask,
 }

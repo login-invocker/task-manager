@@ -3,7 +3,7 @@ import "./manage-task.css"
 import { Table, Input, InputNumber, Popconfirm, Form, Typography, DatePicker } from 'antd';
 
 import Notification from "../Components/nofication-component";
-import {getTasks, updatTask, removeTask} from "../services/task-bot-discord"
+import {getTasks, updateTask, removeTask} from "../services/task-bot-discord"
 import moment from 'moment'
 
 const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'YYY-MM-DD'];
@@ -107,12 +107,11 @@ const ManagerTask = () => {
         
       if (index > -1) {
         const item = newData[index];
-console.log(item)
         newData.splice(index, 1, { ...item, ...row });
         setData(newData);
         setEditingKey('');
         try{
-            const isUpdate = await updatTask(newData[index]);
+            const isUpdate = await updateTask(newData[index]);
             if(isUpdate)
             Notification({
                 type: "success",
@@ -144,14 +143,14 @@ console.log(item)
       const row = await form.validateFields();
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
-        
+        console.log(index)
       if (index > -1) {
-        newData.splice(index, 1);
-        setData(newData);
-        setEditingKey('');
         try{
-            const isUpdate = await removeTask(newData[index]);
-            if(isUpdate)
+            const isRemoved = await removeTask(newData[index]);
+            newData.splice(index, 1);
+            setData(newData);
+            setEditingKey('');
+            if(isRemoved)
             Notification({
                 type: "success",
                 message: "Xóa thành công!"
@@ -187,13 +186,13 @@ console.log(item)
     {
       title: 'Title Task',
       dataIndex: 'title',
-      width: '20%',
+      width: '35%',
       editable: true,
     },
     {
       title: 'Content Task',
       dataIndex: 'content',
-      width: '25%',
+      width: '35%',
       editable: true,
     },
     {
