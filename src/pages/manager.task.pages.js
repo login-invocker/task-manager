@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "./manage-task.css"
-import { Table, Input, InputNumber, Popconfirm, Form, Typography, DatePicker } from 'antd';
+import { Table, Input, Popconfirm, Form, Typography, DatePicker, Alert, Tag } from 'antd';
 
 import Notification from "../Components/nofication-component";
 import {getTasks, updateTask, removeTask} from "../services/task-bot-discord"
 import moment from 'moment'
+import HeaderPage from '../Components/header-pages'
 
 const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY', 'YYY-MM-DD'];
 
@@ -62,6 +63,7 @@ const ManagerTask = () => {
               id: dataRes[i]['_id'],
               title: dataRes[i]['title'],
               content: dataRes[i]['content'] || "Chưa cập nhập",
+              status: dataRes[i]['status'] ? "Đã hoàn thành" : "Chưa hoàn thành",
             //   date:null
               date: moment(dataRes[i]['date']).format(dateFormatList[0])
             });
@@ -180,14 +182,31 @@ const ManagerTask = () => {
     {
         title: 'id Task',
         dataIndex: 'id',
-        width: '5%',
+        width: '10%',
         editable: false,
       },
     {
       title: 'Title Task',
       dataIndex: 'title',
-      width: '35%',
+      width: '20%',
       editable: true,
+    },
+    {
+      title: 'Status Task',
+      dataIndex: 'status',
+      width: '10%',
+      editable: false,
+      render: status => {
+        console.log(status)
+        let color = status === "Đã hoàn thành"? 'green' : 'geekblue' ;
+        return (
+          <>
+                <Tag color={color} >
+                  {status}
+                </Tag>
+          </>
+        )
+      }
     },
     {
       title: 'Content Task',
@@ -198,7 +217,7 @@ const ManagerTask = () => {
     {
       title: 'Date',
       dataIndex: 'date',
-      width: '25%',
+      width: '15%',
       editable: true,
     },
     {
@@ -257,6 +276,9 @@ const ManagerTask = () => {
     };
   });
   return (
+    <>
+    <HeaderPage onback="null" title="Manager Task"/><Alert message="Dùng lệnh `$done +idTask` channel discord để  đánh dấu hoàn thành task" type="warning" />
+
     <Form form={form} component={false}>
       <Table
         components={{
@@ -273,6 +295,7 @@ const ManagerTask = () => {
         }}
       />
     </Form>
+    </>
   );
 };
 

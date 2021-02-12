@@ -1,13 +1,11 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
-import { Layout, Menu, Tooltip, Button  } from 'antd';
+import { Layout, Menu  } from 'antd';
 import RouteConfigExample from './config/router'
-import { UploadOutlined, UserOutlined, VideoCameraOutlined, ExportOutlined, UserSwitchOutlined, InboxOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, DatabaseOutlined } from '@ant-design/icons';
 import './App.css'
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -26,17 +24,17 @@ const App = () =>{
     }}
   >
     <div className="logo" >
-    <p >ATM</p>
+    <p >Manager Task</p>
     </div>
     
     <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
       <Menu.Item key="1" icon={<UserOutlined />}>
       <Link to="/login">Login</Link>
       </Menu.Item>
-      <Menu.Item key="2" icon={<UserOutlined />}>
+      <Menu.Item key="2" icon={<PlusOutlined />}>
       <Link to="/create-task">Create Task</Link>
       </Menu.Item>
-      <Menu.Item key="3" icon={<UserOutlined />}>
+      <Menu.Item key="3" icon={<DatabaseOutlined />}>
       <Link to="/manager-task">Manager Task</Link>
       </Menu.Item>
       </Menu>
@@ -50,7 +48,7 @@ const App = () =>{
 
       </div>
     </Content>
-    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED - Tạo bởi Dang Thanh Tung</Footer>
   </Layout>
   </Router>
 </Layout>
