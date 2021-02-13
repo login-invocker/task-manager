@@ -35,7 +35,6 @@ const CreateTask = () =>{
       };
     
       const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
       };
   return <>
   <HeaderPages onback="null" title="Create Task" subTitle="Create a today task"/>

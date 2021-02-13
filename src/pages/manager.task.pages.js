@@ -136,7 +136,6 @@ const ManagerTask = () => {
         setEditingKey('');
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
     }
   };
 
@@ -145,7 +144,6 @@ const ManagerTask = () => {
       const row = await form.validateFields();
       const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
-        console.log(index)
       if (index > -1) {
         try{
             const isRemoved = await removeTask(newData[index]);
@@ -174,7 +172,6 @@ const ManagerTask = () => {
         setEditingKey('');
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
     }
   };
 
@@ -197,7 +194,7 @@ const ManagerTask = () => {
       width: '10%',
       editable: false,
       render: status => {
-        console.log(status)
+        // console.log(status)
         let color = status === "Đã hoàn thành"? 'green' : 'geekblue' ;
         return (
           <>

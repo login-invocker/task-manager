@@ -22,7 +22,7 @@ const getTasks = async() => {
 }
 
 const removeTask = async(task) => {
-    console.log(task)
+    // console.log(task)
     try{
         const response = await axios.delete(`${config.API_URL}/api/task/${task.id}`)
         return response.status === 200 ? true : false
@@ -32,6 +32,10 @@ const removeTask = async(task) => {
 }
 
 const updateTask = async (task) => {
+    task.status = true 
+    ? task.status === "Đã hoàn thành" 
+    : false
+    
     try{
         const response = await axios.put(`${config.API_URL}/api/task/`,{
             task
