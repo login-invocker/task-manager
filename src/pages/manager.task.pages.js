@@ -266,18 +266,45 @@ const ManagerTask = () => {
       dataIndex: 'isImportant',
       width: '5%',
       editable: true,
+      filters: [
+        {
+          text: 'Task Important',
+          value: "Yes",
+        },{
+          text: 'Task not Important',
+          value: "No",
+        }
+      ],
+      onFilter: (value, record) => record.isImportant === value,
     },
     {
       title: 'Emergency',
       dataIndex: 'isEmergency',
       width: '5%',
       editable: true,
+      filters: [
+        {
+          text: 'Task Emergency',
+          value: "Yes",
+        },{
+          text: 'Task not Emergency',
+          value: "No",
+        }
+      ],
+      onFilter: (value, record) => record.isEmergency === value,
     },
     {
       title: 'Model task',
       dataIndex: 'isModel',
       width: '5%',
       editable: true,
+      filters: [
+        {
+          text: 'Task Model',
+          value: "Yes",
+        }
+      ],
+      onFilter: (value, record) => record.isModel === "Yes",
     },
     {
       title: 'operation',

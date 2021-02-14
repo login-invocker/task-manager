@@ -3,17 +3,7 @@ import { Doughnut } from "react-chartjs-2";
 
 const DoughnutComponent = (props) => {
     const config = props.config
-
-    const setBg = () => {
-        
-        let listColor = []
-        config.data.forEach(() => {
-            let randomColor = Math.floor(Math.random()*16777215).toString(16);
-            randomColor = "#" + randomColor;
-            listColor.push(randomColor)
-        })
-        return listColor
-      }
+    const colors = props.colors
     return (
 <Doughnut
         data={{
@@ -21,7 +11,7 @@ const DoughnutComponent = (props) => {
           datasets: [
             {
               label: "Population (millions)",
-              backgroundColor: setBg(),
+              backgroundColor: colors,
               data: config.data
             }
           ]
