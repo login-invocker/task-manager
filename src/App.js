@@ -35,6 +35,10 @@ const App = () =>{
       <Menu.Item key="3" icon={<DatabaseOutlined />}>
       <Link to="/manager-task">Manager Task</Link>
       </Menu.Item>
+
+      <Menu.Item key="4" icon={<DatabaseOutlined />}>
+      <Link to="/manager-time">Manager Time</Link>
+      </Menu.Item>
       </Menu>
   </Sider>
   <Layout>

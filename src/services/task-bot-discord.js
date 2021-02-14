@@ -65,9 +65,19 @@ const updateTask = async (task) => {
         return false
     }
 }
+const getMatrixTasks = async() => {
+    try{
+        const response = await axios.get(`${config.API_URL}/api/task/eisenhower`)
+        return response.data
+    }catch{
+        return false
+    }
+}
+
 export{
     createtask,
     getTasks,
     updateTask,
     removeTask,
+    getMatrixTasks
 }

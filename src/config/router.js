@@ -8,6 +8,8 @@ import './router.css'
 import Login from "../pages/Login-page"
 import CreateTask from "../pages/Create.Task-pages"
 import TaskManager from "../pages/manager.task.pages"
+import TimeManager from "../pages/ManagerTime-pages"
+
 // Some folks find value in a centralized route config.
 // A route config is just data. React is great at mapping
 // data into components, and <Route> is a component.
@@ -27,7 +29,11 @@ const routes = [
   {
     path: "/manager-task",
     component: TaskManager
+  },{
+    path: "/manager-time",
+    component: TimeManager
   }
+
 ];
 
 export default function RouteConfigExample() {
