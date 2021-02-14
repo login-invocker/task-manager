@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderPages from '../Components/header-pages'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Switch } from 'antd';
 import {createtask} from '../services/task-bot-discord'
 import Notification from '../Components/nofication-component';
 
@@ -70,6 +70,27 @@ const CreateTask = () =>{
         ]}
       >
         <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Model Task"
+        name="isModel"
+      >
+      <Switch checkedChildren="Yes" unCheckedChildren="No" />
+      </Form.Item>
+      {/* Việc này có quan trọng không? */}
+      <Form.Item
+        label="Task important?"
+        name="isImportant"
+      >
+      <Switch checkedChildren="Yes" unCheckedChildren="No" />
+      </Form.Item>
+            {/* Việc này có khẩn cấp không? */}
+            <Form.Item
+        label="Task emergency?"
+        name="isEmergency"
+      >
+      <Switch checkedChildren="Yes"  unCheckedChildren="No" />
       </Form.Item>
 
       <Form.Item {...tailLayout}>

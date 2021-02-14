@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import './router.css'
 import Login from "../pages/Login-page"

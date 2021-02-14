@@ -1,4 +1,4 @@
-import { Button, notification, Space } from 'antd';
+import { notification } from 'antd';
 
 const openNotificationWithIcon = props => {
   notification[props.type]({
