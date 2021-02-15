@@ -11,6 +11,7 @@ import CreateTask from "../pages/Create.Task-pages"
 import TaskManager from "../pages/manager.task.pages"
 import TimeManager from "../pages/ManagerTime-pages"
 import RegisterPage from "../pages/Register-User.page"
+import AnalyticsTaskPage from "../pages/analytics.Task-page"
 
 import {authContext} from '../App'
 
@@ -42,6 +43,11 @@ const routes = [
     path: "/manager-time",
     component: TimeManager,
     isPrivate: true
+  },
+  {
+    path: "/analytics-task",
+    component: AnalyticsTaskPage,
+    isPrivate: false
   },
   {
     path: "/register",

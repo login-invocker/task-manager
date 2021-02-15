@@ -48,10 +48,14 @@ const App = () =>{
             <Link to="/manager-time">Manager Time</Link>
             </Menu.Item>
             
+            <Menu.Item key="6" icon={<UserOutlined />}>
+            <Link to="/analytics-task">Analytic Task</Link>
+            </Menu.Item>
+            
             <Menu.Item key="5" icon={<UserOutlined />}>
             <Link to="/register">Register</Link>
             </Menu.Item>
-            
+
             </Menu>
         </Sider>
         <Layout>

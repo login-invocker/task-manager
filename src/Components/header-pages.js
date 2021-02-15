@@ -7,6 +7,7 @@ return (
     onBack={() => pro.onback}
     title={pro.title}
     subTitle={pro.subTitle}
+    extra= {pro.extra}
   />
 )
 }

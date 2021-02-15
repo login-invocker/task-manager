@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import "./manage-task.css"
-import { Table, Input, Popconfirm, Form, Typography, DatePicker, Alert, Tag, Switch } from 'antd';
+import { Table, Input, Popconfirm, Form, 
+  Typography, DatePicker, Alert, Tag, Switch,
+  Button
+} from 'antd';
+import {
+  SyncOutlined,
+} from '@ant-design/icons';
 
 import Notification from "../Components/nofication-component";
 import {getTasks, updateTask, removeTask} from "../services/task-bot-discord"
@@ -73,40 +79,48 @@ const ManagerTask = () => {
   const [form] = Form.useForm();
   const [data, setData] = useState([]);
   const [editingKey, setEditingKey] = useState('');
-
-  useEffect(() => {
-    const callApi = async () => {
-      const dataRes = await getTasks();
-      let dataMap = []
-      if(dataRes){
-        for (let i = 0; i < dataRes.length; i++) {
-            dataMap.push({
-              key: i.toString(),
-              id: dataRes[i]['_id'],
-              title: dataRes[i]['title'],
-              content: dataRes[i]['content'] || "Chưa cập nhập",
-              status: dataRes[i]['status'] ? "Đã hoàn thành" : "Chưa hoàn thành",
-              date: moment(dataRes[i]['date']).format(dateFormatList[2]),
-              isModel: dataRes[i]['isModel'] === true ? 'Yes': 'No',
-              isImportant: dataRes[i]['isImportant'] === true ? "Yes": "No",
-              isEmergency: dataRes[i]['isEmergency'] === true? "Yes": 'No',
-            });
-          }
-        setData(dataMap)
-        Notification({
-          type: "success",
-          message: "Lấy dữ liệu thành công!"
-        })
-      }
-      else{
-        Notification({
-          type: "error",
-          message: "Lấy dữ liệu thất bại!"
-        })
-      }
+  const callApi = async () => {
+    const dataMap = await mapTask()
+      if(dataMap){
+      setData(dataMap)
+      Notification({
+        type: "success",
+        message: "Lấy dữ liệu thành công!"
+      })
     }
+    else{
+      Notification({
+        type: "error",
+        message: "Lấy dữ liệu thất bại!"
+      })
+    }
+  }
+  useEffect(() => {
+    
     callApi()
   }, [])
+
+  const mapTask = async () => {
+    const dataRes = await getTasks();
+    let dataMap = []
+    if(dataRes){
+      for (let i = 0; i < dataRes.length; i++) {
+          dataMap.push({
+            key: i.toString(),
+            id: dataRes[i]['_id'],
+            title: dataRes[i]['title'],
+            content: dataRes[i]['content'] || "Chưa cập nhập",
+            status: dataRes[i]['status'] ? "Đã hoàn thành" : "Chưa hoàn thành",
+            date: moment(dataRes[i]['date']).format(dateFormatList[2]),
+            isModel: dataRes[i]['isModel'] === true ? 'Yes': 'No',
+            isImportant: dataRes[i]['isImportant'] === true ? "Yes": "No",
+            isEmergency: dataRes[i]['isEmergency'] === true? "Yes": 'No',
+          });
+     }
+      
+     return dataMap
+  }
+  }
 
   const isEditing = (record) => record.key === editingKey;
 
@@ -367,7 +381,18 @@ const ManagerTask = () => {
   });
   return (
     <>
-    <HeaderPage onback="null" title="Manager Task"/><Alert message="Dùng lệnh `$done +idTask` channel discord để  đánh dấu hoàn thành task" type="warning" />
+    <HeaderPage onback="null" title="Manager Task"
+    extra={[
+      <Button 
+        key='1'
+        type="primary" 
+        icon={<SyncOutlined spin/>}
+        onClick={() => callApi()}>
+      Click to async data
+        </Button>
+    ]}
+    />
+    <Alert message="Dùng lệnh `$done +idTask` channel discord để  đánh dấu hoàn thành task" type="warning" />
 
     <Form form={form} component={false}>
       <Table

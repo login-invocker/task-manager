@@ -94,12 +94,12 @@ const tailLayout = {
         name="password"
         rules={[
           {
-            // type: 'password',
+            required: true,
             message: 'Please input your pass!',
           },
         ]}
       >
-        <Input />
+        <Input.Password />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">

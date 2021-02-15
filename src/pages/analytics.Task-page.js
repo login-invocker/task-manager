@@ -1,21 +1,24 @@
 import React from "react";
-import { Row, Col,Button } from 'antd';
-import DoughnutComponent from '../Components/Doughnut.component'
-import PiceChartRechar from '../Components/PiceChartRechar.component'
-import {getMatrixTasks} from "../services/task-bot-discord"
+import { Row, Col,Button, DatePicker, Space } from 'antd';
+import BarChartComponent from '../Components/Bar-chart.component'
+import {getTasks} from "../services/task-bot-discord"
 import HeaderPage from '../Components/header-pages'
 import Notification from "../Components/nofication-component";
 import {
     SyncOutlined,
   } from '@ant-design/icons';
+  import moment from "moment"
+  const { RangePicker } = DatePicker;
+
+
 
 let allTask = []
 let colors = []
 const ManagerTimePage = () => {
     const [reload, setReload] = React.useState({})
-    // const [color, setColors] = React.useState([])
     React.useEffect(async () => {
-        const dataTask = await getMatrixTasks()
+        const dataTask = await getTasks()
+        console.log(dataTask)
         if(dataTask){
             Notification({
                 type: "success",
@@ -36,15 +39,10 @@ const ManagerTimePage = () => {
 
     })
 
-    const wrap2ArrayTask = () => {
-        const titleArray = allTask.map(task => task.title);
-        const timePercentArray  =  allTask.map(task => task.timePercent);
-        const result = {
-            labels:titleArray,
-            data: timePercentArray
-        }
-        return result
-    }
+    function onChange(dates, dateStrings) {
+        console.log('From: ', dates[0], ', to: ', dates[1]);
+        console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+      }
 
     const dataForPiceChartRechar = () => {
         let data = [];
@@ -63,6 +61,19 @@ const ManagerTimePage = () => {
         <HeaderPage onback="null" 
         title="Manager Time with matrix EISENHOWER"
         extra={[
+            <Space direction="vertical" size={12}>
+                <RangePicker
+                ranges={{
+                        Today: [moment(), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'This week': [moment().startOf('week'), moment().endOf('week')],
+
+                }}
+                onChange={onChange}   
+            //    showTime
+               />
+                
+            </Space>,
             <Button type="primary" 
             icon={<SyncOutlined spin/>}
             onClick={() => setReload()}>
@@ -72,11 +83,11 @@ const ManagerTimePage = () => {
         />
         <Row>
         <Col span={18} push={6}>
-        <DoughnutComponent colors={colors} config={wrap2ArrayTask()}/>
+        {/* <DoughnutComponent colors={colors} config={wrap2ArrayTask()}/> */}
+        <BarChartComponent colors={colors} config={dataForPiceChartRechar()}/>
 
         </Col>
         <Col span={6} pull={18}>
-        <PiceChartRechar colors={colors} config={dataForPiceChartRechar()}/>
 
         </Col>
       </Row>
