@@ -4,13 +4,13 @@ import {
   Switch,
   Route,
   Redirect,
-  useLocation
 } from "react-router-dom";
 import './router.css'
 import LoginPage from "../pages/Login-page"
 import CreateTask from "../pages/Create.Task-pages"
 import TaskManager from "../pages/manager.task.pages"
 import TimeManager from "../pages/ManagerTime-pages"
+import RegisterPage from "../pages/Register-User.page"
 
 import {authContext} from '../App'
 
@@ -42,6 +42,11 @@ const routes = [
     path: "/manager-time",
     component: TimeManager,
     isPrivate: true
+  },
+  {
+    path: "/register",
+    component: RegisterPage,
+    isPrivate: false
   }
 
 ];

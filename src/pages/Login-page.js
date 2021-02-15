@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   useHistory,
@@ -7,6 +7,7 @@ import {
 import { Form, Input, Button } from 'antd';
 import {authContext} from '../App'
 import {loginService} from '../services/user-service'
+import Notification from "../Components/nofication-component";
 
 function useAuth() {
   return useContext(authContext);
@@ -25,13 +26,23 @@ const LoginPages = () =>{
   };
 
   const onFinish = async (values) => {
-    console.log(values)
-    const islogin = loginService(values)
-    console.log(islogin)
-    if(islogin)
-    return login()
-    else
-    return 
+    const responseData =  await loginService(values)
+    console.log(responseData)
+    if(responseData.status !== 201)
+    {
+      Notification({
+        type: "success",
+        message: "Chào mừng đến với You Task!"
+      })
+      return login()
+    }
+    else{
+      Notification({
+        type: "error",
+        message: responseData.data.message
+      })
+      
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -66,7 +77,7 @@ const tailLayout = {
     >
       <Form.Item
         label="User Name"
-        name="nameUser"
+        name="username"
         rules={[
           {
             required: true,
@@ -79,9 +90,10 @@ const tailLayout = {
 
       <Form.Item
         label="Password"
-        name="passwordUser"
+        name="password"
         rules={[
           {
+            // type: 'password',
             message: 'Please input your pass!',
           },
         ]}
