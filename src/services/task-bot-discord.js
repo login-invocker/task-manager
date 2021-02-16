@@ -74,10 +74,28 @@ const getMatrixTasks = async() => {
     }
 }
 
+const getDataForBarChar = async(dateRanger) => {
+    let dataRequest = {}
+    if(dateRanger){
+        dataRequest = {
+        "startDate": dateRanger.startDate,
+        "endDate": dateRanger.endDate
+        }
+    }
+    
+    try{
+        const response = await axios.post(`${config.API_URL}/api/task/bar-chart`, dataRequest)
+        return response.data
+    }catch{
+        return false
+    }
+}
+
 export{
     createtask,
     getTasks,
     updateTask,
     removeTask,
-    getMatrixTasks
+    getMatrixTasks,
+    getDataForBarChar
 }

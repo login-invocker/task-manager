@@ -47,7 +47,7 @@ const routes = [
   {
     path: "/analytics-task",
     component: AnalyticsTaskPage,
-    isPrivate: false
+    isPrivate: true
   },
   {
     path: "/register",

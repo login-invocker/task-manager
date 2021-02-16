@@ -1,29 +1,26 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-const BarChartComponent = () => {
-    return(
+const BarChartComponent = (props) => {
+    const [dataTask, setDataTask] = React.useState(props.config)
+
+    React.useEffect(() => {
+        setDataTask(props.config)
+    })
+        return(
         <Bar
     data={{
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July"
-      ],
+      labels: dataTask.date,
       datasets: [
         {
           label: "All Task",
           backgroundColor: "rgba(255,99,132,0.2)",
           borderColor: "rgba(255,99,132,1)",
           borderWidth: 1,
-          //stack: 1,
-        //   hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        //   hoverBorderColor: "rgba(255,99,132,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
+        //   stack: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: dataTask.allTask
         },
 
         {
@@ -31,20 +28,20 @@ const BarChartComponent = () => {
           backgroundColor: "rgba(155,231,91,0.2)",
           borderColor: "rgba(255,99,132,1)",
           borderWidth: 1,
-          //stack: 1,
-        //   hoverBackgroundColor: "rgba(255,99,132,0.4)",
-        //   hoverBorderColor: "rgba(255,99,132,1)",
-          data: [45, 79, 50, 41, 16, 85, 20]
+        //   stack: 1,
+          hoverBackgroundColor: "rgba(255,99,132,0.4)",
+          hoverBorderColor: "rgba(255,99,132,1)",
+          data: dataTask.taskDone
         },
         {
             label: "Task Unfinished",
-            backgroundColor: "rgba(155,231,91,0.2)",
+            backgroundColor: "red",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 1,
-            //stack: 1,
-          //   hoverBackgroundColor: "rgba(255,99,132,0.4)",
-          //   hoverBorderColor: "rgba(255,99,132,1)",
-            data: [20, 20, 50, 41, 16, 85, 20]
+            // stack: 1,
+            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+            hoverBorderColor: "rgba(255,99,132,1)",
+            data: dataTask.taskUnfinished
           }
       ]
     }}
@@ -52,7 +49,7 @@ const BarChartComponent = () => {
       legend: { display: true },
       title: {
         display: true,
-        text: "Predicted world population (millions) in 2050"
+        text: `Bảng thống kê khối lượng công việc trong ${dataTask.date?dataTask.date.length: ""} ngày từ ${dataTask.date?dataTask.date[0]: ""} đến ${dataTask.date?dataTask.date[dataTask.date.length - 1]: ""}` 
       }
     }}
   />

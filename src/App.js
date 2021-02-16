@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { Layout, Menu} from 'antd';
 import RouteConfig from './config/router'
-import { UserOutlined, PlusOutlined, DatabaseOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, DatabaseOutlined, FundTwoTone, PieChartTwoTone } from '@ant-design/icons';
 import './App.css'
 const { Header, Content, Footer, Sider } = Layout;
 export const authContext = createContext();
@@ -44,14 +44,14 @@ const App = () =>{
             <Link to="/manager-task">Manager Task</Link>
             </Menu.Item>
 
-            <Menu.Item key="4" icon={<DatabaseOutlined />}>
+            <Menu.Item key="4" icon={<PieChartTwoTone />}>
             <Link to="/manager-time">Manager Time</Link>
             </Menu.Item>
             
-            <Menu.Item key="6" icon={<UserOutlined />}>
+            <Menu.Item key="6" icon={<FundTwoTone />}>
             <Link to="/analytics-task">Analytic Task</Link>
             </Menu.Item>
-            
+
             <Menu.Item key="5" icon={<UserOutlined />}>
             <Link to="/register">Register</Link>
             </Menu.Item>

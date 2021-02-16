@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col,Button, DatePicker, Space } from 'antd';
 import BarChartComponent from '../Components/Bar-chart.component'
-import {getTasks} from "../services/task-bot-discord"
+import {getDataForBarChar} from "../services/task-bot-discord"
 import HeaderPage from '../Components/header-pages'
 import Notification from "../Components/nofication-component";
 import {
@@ -11,50 +11,40 @@ import {
   const { RangePicker } = DatePicker;
 
 
-
-let allTask = []
-let colors = []
 const ManagerTimePage = () => {
     const [reload, setReload] = React.useState({})
-    React.useEffect(async () => {
-        const dataTask = await getTasks()
-        console.log(dataTask)
-        if(dataTask){
-            Notification({
-                type: "success",
-                message: "Lấy dữ liệu thành công!"
-            })
-            allTask = dataTask
-
-            const setBg = () => {
-                    allTask.forEach(() => {
-                    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-                    randomColor = "#" + randomColor;
-                    colors.push(randomColor)
-                })    
+    const [dataTask, setDataTask] = React.useState({})
+    
+    React.useEffect( () => {
+         getDataForBarChar().then(data=> {
+            console.log(data)
+            setDataTask(data)
+            if(data){
+                Notification({
+                    type: "success",
+                    message: "Lấy dữ liệu thành công!"
+                })
             }
-            setBg()
-            setReload('')
-        }
-
-    })
+        })
+    return true
+    }, [])
 
     function onChange(dates, dateStrings) {
-        console.log('From: ', dates[0], ', to: ', dates[1]);
-        console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
-      }
-
-    const dataForPiceChartRechar = () => {
-        let data = [];
-        allTask.forEach(task => {
-            const x = {
-                name: task.title,
-                value:  task.timePercent
+        const ranger = {
+            startDate: dateStrings[0],
+            endDate: dateStrings[1]
+        }
+        getDataForBarChar(ranger).then(data=> {
+            console.log(data)
+            setDataTask(data)
+            if(data){
+                Notification({
+                    type: "success",
+                    message: "Lấy dữ liệu mới công!"
+                })
             }
-            data.push(x)
         })
-        return data
-    }
+      }
 
     return (
         <>
@@ -83,8 +73,7 @@ const ManagerTimePage = () => {
         />
         <Row>
         <Col span={18} push={6}>
-        {/* <DoughnutComponent colors={colors} config={wrap2ArrayTask()}/> */}
-        <BarChartComponent colors={colors} config={dataForPiceChartRechar()}/>
+        <BarChartComponent config={dataTask}/>
 
         </Col>
         <Col span={6} pull={18}>
