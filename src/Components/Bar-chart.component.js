@@ -1,5 +1,5 @@
 import React from "react";
-import {Switch, Space, Row, Col} from 'antd'
+import {Switch, Row, Col, Space} from 'antd'
 import { Bar } from "react-chartjs-2";
 
 const BarChartComponent = (props) => {
@@ -10,7 +10,7 @@ const BarChartComponent = (props) => {
 
     React.useEffect(() => {
         setDataTask(props.config)
-    },[])
+    },[props.config])
         return(
           <>
               <Row>
@@ -18,13 +18,13 @@ const BarChartComponent = (props) => {
       <Space>
             All task: 
            <Switch
-                checkedChildren="bar"
-                unCheckedChildren="line"
+                checkedChildren="line"
+                unCheckedChildren="bar"
                 onChange={(isChecked) => {
                     if(isChecked === true){
-                      setAllTaskType('bar')
-                    }else{
                       setAllTaskType('line')
+                    }else{
+                      setAllTaskType('bar')
                     }
 
                 }}
@@ -35,13 +35,13 @@ const BarChartComponent = (props) => {
       <Space>
             Task done: 
            <Switch
-                checkedChildren="bar"
-                unCheckedChildren="line"
+                checkedChildren="line"
+                unCheckedChildren="bar"
                 onChange={(isChecked) => {
                     if(isChecked === true){
-                      setDoneTaskType('bar')
-                    }else{
                       setDoneTaskType('line')
+                    }else{
+                      setDoneTaskType('bar')
                     }
 
                 }}
@@ -52,13 +52,13 @@ const BarChartComponent = (props) => {
       <Space>
             Unfinished task: 
            <Switch
-                checkedChildren="bar"
-                unCheckedChildren="line"
+                checkedChildren="line"
+                unCheckedChildren="bar"
                 onChange={(isChecked) => {
                     if(isChecked === true){
-                      setUntaskType('bar')
-                    }else{
                       setUntaskType('line')
+                    }else{
+                      setUntaskType('bar')
                     }
 
                 }}
@@ -72,7 +72,7 @@ const BarChartComponent = (props) => {
       datasets: [
         {
           label: "All Task",
-          backgroundColor: "rgba(100, 100, 255, 0.7)",
+          backgroundColor: "rgba(51, 100, 255, 0.7)",
           borderColor: "rgba(100,100,255,1)",
           borderWidth: 1,
         //   stack: 1,

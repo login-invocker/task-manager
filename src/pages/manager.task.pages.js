@@ -340,7 +340,7 @@ const ManagerTask = () => {
               Save
             </a>
             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-              <a>Cancel</a>
+              <a href="javascript:;">Cancel</a>
             </Popconfirm>
             <a
               href="javascript:;"
@@ -481,7 +481,9 @@ const EditableCell = ({
         <Form.Item
           name={dataIndex}
           // switch
-          valuePropName= {(record.isModel === true || record.isModel === "Yes") && dataIndex === "isModel" || (record.isImportant === true || record.isImportant === "Yes" ) && dataIndex === "isImportant" ||  (record.isEmergency === true || record.isEmergency === "Yes") && dataIndex === "isEmergency" ? 'checked': ''}
+          valuePropName= {record.isModel === true || record.isModel === "Yes" && dataIndex === "isModel"
+          || record.isImportant === true || record.isImportant === "Yes"  && dataIndex === "isImportant"
+          || record.isEmergency === true || record.isEmergency === "Yes" && dataIndex === "isEmergency" ? 'checked': ''}
           style={{
             margin: 0,
           }}
