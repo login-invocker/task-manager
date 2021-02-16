@@ -6,13 +6,10 @@ const BarChartComponent = (props) => {
     const [dataTask, setDataTask] = React.useState(props.config)
     const [allTaslType, setAllTaskType] =   React.useState("bar")
     const [donetaskType, setDoneTaskType] =   React.useState("bar")
-    const [unTaskType, setUntasktype] =   React.useState("bar")
+    const [unTaskType, setUntaskType] =   React.useState("bar")
 
     React.useEffect(() => {
         setDataTask(props.config)
-        setAllTaskType('bar')
-        setDoneTaskType('bar')
-        setUntasktype('bar')
     },[])
         return(
           <>
@@ -59,9 +56,9 @@ const BarChartComponent = (props) => {
                 unCheckedChildren="line"
                 onChange={(isChecked) => {
                     if(isChecked === true){
-                      setUntasktype('bar')
+                      setUntaskType('bar')
                     }else{
-                      setUntasktype('line')
+                      setUntaskType('line')
                     }
 
                 }}
@@ -82,7 +79,7 @@ const BarChartComponent = (props) => {
           hoverBackgroundColor: "rgba(255,99,132,0.4)",
           hoverBorderColor: "rgba(255,99,132,1)",
           data: dataTask.allTask,
-          // type: allTaslType,
+          type: allTaslType,
           fill: false,
         },
 
@@ -95,7 +92,7 @@ const BarChartComponent = (props) => {
           hoverBackgroundColor: "rgba(255,99,132,0.4)",
           hoverBorderColor: "rgba(255,99,132,1)",
           data: dataTask.taskDone,
-          // type: donetaskType
+          type: donetaskType
         },
         {
             label: "Task Unfinished",
@@ -106,7 +103,7 @@ const BarChartComponent = (props) => {
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
             data: dataTask.taskUnfinished,
-            // type: unTaskType,
+            type: unTaskType,
           }
       ]
     }}
